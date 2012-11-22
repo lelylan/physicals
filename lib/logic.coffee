@@ -50,6 +50,7 @@ start = (event) ->
       event.physical_processed = true; event.save()
 
     # EVERYTHING STARTS HERE ->
+    console.log 'DEBUG: fetching new event' if process.env.DEBUG
     Device.findById(event.resource_id, findDevice)
     setPhysicalProcessed()
 
