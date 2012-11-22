@@ -1,4 +1,4 @@
 logic = require './lib/logic'
 
-console.log 'DEBUG: webhooks worker up and running' if process.env.DEBUG
+console.log 'DEBUG: physical dispatcher up and running' if process.env.DEBUG
 logic.execute()

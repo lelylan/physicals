@@ -22,7 +22,7 @@ start = (event) ->
     # Check if the device has a physical connection
     findDevice = (err, device) ->
       console.log "ERROR", err.message if (err)
-      condole.log 'DEBUG: device without physical connection' if (!device.physical and process.env.DEBUG)
+      condole.log 'DEBUG: device without physical connection' if (device and !device.physical and process.env.DEBUG)
       sendRequest(device) if (device and device.physical)
 
     # Send the request to the physical device
