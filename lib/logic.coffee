@@ -43,7 +43,7 @@ start = (event) ->
       shasum  = crypto.createHmac("sha1", device.secret);
       content = payload(event)
       shasum.update JSON.stringify(content)
-      { 'X-Physical-Signature': shasum.digest('hex'), 'accept': 'application/json' }
+      { 'X-Physical-Signature': shasum.digest('hex'), 'Content-Type': 'application/json' }
 
     # Set the physical_processed field to true
     setPhysicalProcessed = ->
