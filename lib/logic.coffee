@@ -20,38 +20,37 @@ start = (event) ->
   ( (event) ->
 
     # Check if the device has a physical connection
-    findDevice = (device) ->
-      #console.log "Device found", device
-      if (device and device.physical) then sendRequest(device)
-      event.physical_processed = true; event.save()
+    findDevice = (err, device) ->
+      console.log "ERROR", err.message if (err)
+      condole.log 'DEBUG: device without physical connection' if (!device.physical and process.env.DEBUG)
+      sendRequest(device) if (device and device.physical)
 
     # Send the request to the physical device
     sendRequest = (device) ->
-      #options = { uri: device.physical, method: 'POST', headers: getHeaders(event), json: payload(event) }
+      console.log 'DEBUG: sending request to', device.physical if process.env.DEBUG
+      options = { uri: device.physical, method: 'POST', headers: getHeaders(device), json: payload() }
 
-      #request options, (err, response, body) ->
-        #console.log 'DEBUG: request sent to', device.physical if process.env.DEBUG
-        #if err { console.log 'ERROR', err.message }
+      request options, (err, response, body) ->
+        console.log "ERROR", err.message if (err)
+        console.log 'DEBUG: request sent to', device.physical if process.env.DEBUG
 
-        #setPhysicalProcessed()
+    # Create the payload to send to the physical device
+    payload = () ->
+      { nonce: uuid.v4(), properties: event.data.properties }
 
-    ## Create the payload to send to the physical device
-    #payload = (event) ->
-      #{ nonce: uuid.v4(), properties: event.data.properties }
+    # Create the headers to send to the physical device
+    getHeaders = (device) ->
+      shasum  = crypto.createHmac("sha1", device.secret);
+      content = payload(event)
+      shasum.update JSON.stringify(content)
+      { 'X-Physical-Signature': shasum.digest('hex'), 'accept': 'application/json' }
 
-    ## Create the headers to send to the physical device
-    #getHeaders = (event) ->
-      #shasum  = crypto.createHmac("sha1", event.client.secret);
-      #content = payload(event)
-      #shasum.update JSON.stringify(content)
-      #{ 'X-Physical-Signature': shasum.digest('hex'), 'accept': 'application/json' }
-
-    ## Set the physical_processed field to true
-    #setPhysicalProcessed = ->
-      #event.physical_processed = true; event.save()
+    # Set the physical_processed field to true
+    setPhysicalProcessed = ->
+      event.physical_processed = true; event.save()
 
     # EVERYTHING STARTS HERE ->
-    console.log(event)
     Device.findById(event.resource_id, findDevice)
+    setPhysicalProcessed()
 
   )(event)

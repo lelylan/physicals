@@ -8,3 +8,8 @@ Factory.define 'event', Event,
   resource: 'devices'
   event: 'property-updated'
   source: 'lelylan'
+  data:
+    properties:
+      uri: 'http://api.lelylan.com/properties/5003c60ed033a96b96000006'
+      id: '5003c60ed033a96b96000006'
+      value: 'on'
