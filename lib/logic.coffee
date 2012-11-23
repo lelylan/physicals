@@ -28,7 +28,7 @@ start = (event) ->
     # Send the request to the physical device
     sendRequest = (device) ->
       console.log 'DEBUG: sending request to', device.physical if process.env.DEBUG
-      options = { uri: device.physical, method: 'POST', headers: getHeaders(device), json: payload() }
+      options = { uri: device.physical, method: 'PUT', headers: getHeaders(device), json: payload() }
 
       request options, (err, response, body) ->
         console.log "ERROR", err.message if (err)

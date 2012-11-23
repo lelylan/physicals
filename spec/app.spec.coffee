@@ -32,7 +32,7 @@ describe 'Physical Requests', ->
 
   describe 'when there is a device with a physical connection', ->
 
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).post('/5a3c', '*').reply(200)
+    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
 
     beforeEach ->
       setTimeout ( ->
@@ -48,7 +48,7 @@ describe 'Physical Requests', ->
 
   describe 'when the updates comes from the physical world', ->
 
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).post('/5a3c', '*').reply(200)
+    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
 
     beforeEach ->
       setTimeout ( ->
@@ -64,7 +64,7 @@ describe 'Physical Requests', ->
 
   describe 'when the event is not property-updated', ->
 
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).post('/5a3c', '*').reply(200)
+    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
 
     beforeEach ->
       setTimeout ( ->
@@ -80,7 +80,7 @@ describe 'Physical Requests', ->
 
   describe 'when the device has not a physical connection', ->
 
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).post('/5a3c', '*').reply(200)
+    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
 
     beforeEach ->
       setTimeout ( ->
@@ -96,7 +96,7 @@ describe 'Physical Requests', ->
 
   describe 'when the physical device returns an error', ->
 
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).post('/5a3c', '*').reply(500)
+    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(500)
 
     beforeEach ->
       setTimeout ( ->
