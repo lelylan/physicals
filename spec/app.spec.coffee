@@ -5,19 +5,19 @@ fs       = require 'fs'
 helper = require './helper'
 logic  = require '../lib/logic'
 
-Event   = require '../app/models/jobs/event'
+Physical   = require '../app/models/jobs/physical'
 Device  = require '../app/models/devices/device'
 Factory = require 'factory-lady'
 
-require './factories/jobs/event'
+require './factories/jobs/physical'
 require './factories/devices/device'
 
 # Global variables
-event = device = device_no_physical = request = undefined
+physical = device = device_no_physical = request = undefined
 
-# Get back the updated event representation after it has been processed.
-getProcessedEvent = (doc)->
-  setTimeout ( -> Event.findById doc.id, (err, doc) ->  event = doc ), settings.factory_time / 2
+# Get back the updated physical representation after it has been processed.
+getProcessedPhysical = (doc)->
+  setTimeout ( -> Physical.findById doc.id, (err, doc) ->  physical = doc ), settings.factory_time / 2
 
 
 describe 'Physical Requests', ->
@@ -36,46 +36,14 @@ describe 'Physical Requests', ->
 
     beforeEach ->
       setTimeout ( ->
-        Factory.create('event', { resource_id: device.id }, (doc) -> getProcessedEvent(doc))
+        Factory.create('physical', { resource_id: device.id }, (doc) -> getProcessedPhysical(doc))
       ), settings.factory_time
 
     it 'makes an HTTP request to the physical device', (done) ->
       setTimeout ( -> expect(request.isDone()).toBe(true); done() ), settings.process_time
 
-    it 'sets event#physical_processed field as processed', (done) ->
-      setTimeout ( -> expect(event.physical_processed).toBe(true); done() ), settings.process_time
-
-
-  describe 'when the updates comes from the physical world', ->
-
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
-
-    beforeEach ->
-      setTimeout ( ->
-        Factory.create('event', { source: 'physical' }, (doc) -> getProcessedEvent(doc))
-      ), settings.factory_time
-
-    it 'does not make an HTTP request to the physical device', (done) ->
-      setTimeout ( -> expect(request.isDone()).toBe(false); done() ), settings.process_time
-
-    it 'does not set event#physical_processed field as processed', (done) ->
-      setTimeout ( -> expect(event.physical_processed).toBe(false); done() ), settings.process_time
-
-
-  describe 'when the event is not property-updated', ->
-
-    beforeEach -> request = nock('http://arduino.house.com').filteringRequestBody( (path) -> '*' ).put('/5a3c', '*').reply(200)
-
-    beforeEach ->
-      setTimeout ( ->
-        Factory.create('event', { resource_id: device.id, event: 'created' }, (doc) -> getProcessedEvent(doc))
-      ), settings.factory_time
-
-    it 'does not make an HTTP request to the physical device', (done) ->
-      setTimeout ( -> expect(request.isDone()).toBe(false); done() ), settings.process_time
-
-    it 'does not set event#physical_processed field as processed', (done) ->
-      setTimeout ( -> expect(event.physical_processed).toBe(false); done() ), settings.process_time
+    it 'sets physical#physical_processed field as processed', (done) ->
+      setTimeout ( -> expect(physical.physical_processed).toBe(true); done() ), settings.process_time
 
 
   describe 'when the device has not a physical connection', ->
@@ -84,14 +52,14 @@ describe 'Physical Requests', ->
 
     beforeEach ->
       setTimeout ( ->
-        Factory.create('event', { resource_id: device_no_physical.id }, (doc) -> getProcessedEvent(doc))
+        Factory.create('physical', { resource_id: device_no_physical.id }, (doc) -> getProcessedPhysical(doc))
       ), settings.factory_time
 
     it 'does not make an HTTP request to the not existing physical device', (done) ->
       setTimeout ( -> expect(request.isDone()).toBe(false); done() ), settings.process_time
 
-    it 'sets event#physical_processed field as processed', (done) ->
-      setTimeout ( -> expect(event.physical_processed).toBe(true); done() ), settings.process_time
+    it 'sets physical#physical_processed field as processed', (done) ->
+      setTimeout ( -> expect(physical.physical_processed).toBe(true); done() ), settings.process_time
 
 
   describe 'when the physical device returns an error', ->
@@ -100,12 +68,12 @@ describe 'Physical Requests', ->
 
     beforeEach ->
       setTimeout ( ->
-        Factory.create('event', { resource_id: device.id }, (doc) -> getProcessedEvent(doc))
+        Factory.create('physical', { resource_id: device.id }, (doc) -> getProcessedPhysical(doc))
       ), settings.factory_time
 
     it 'makes an HTTP request to the not existing physical device', (done) ->
       setTimeout ( -> expect(request.isDone()).toBe(true); done() ), settings.process_time
 
-    it 'sets event#physical_processed field as processed', (done) ->
-      setTimeout ( -> expect(event.physical_processed).toBe(true); done() ), settings.process_time
+    it 'sets physical#physical_processed field as processed', (done) ->
+      setTimeout ( -> expect(physical.physical_processed).toBe(true); done() ), settings.process_time
 
