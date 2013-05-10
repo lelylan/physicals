@@ -16,7 +16,7 @@ Run Node server
 
     foreman start
 
-## Deploay
+## Deploy
 
 Follow [Node.js on Heroku](https://devcenter.heroku.com/articles/nodejs).
 
