@@ -1,6 +1,6 @@
 # Physical Devices Dispatcher
 
-Physical devices dispatcher for Lelylan. When a request is made from the cloud (through API) a [physical param](http://dev.lelylan.com/developers#get-a-device) is called to communicate with the physical world (see).
+Physical devices dispatcher. When a request is made from the cloud (through API) the [physical URL](http://dev.lelylan.com/developers#get-a-device) which is used to decouple the cloud from any physical device or protocol is called to communicate with the physical world. An example of physical URL is the one defined by the [MQTT node](https://github.com/lelylan/nodes).
 
 
 ## Requirements
