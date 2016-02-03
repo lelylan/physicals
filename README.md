@@ -1,6 +1,8 @@
-# Physical Devices Dispatcher
+# Physical Proxy
 
-Physical devices dispatcher. When a request is made from the cloud (through API) the [physical URL](http://dev.lelylan.com/developers#get-a-device) which is used to decouple the cloud from any physical device or protocol is called to communicate with the physical world. An example of physical URL is the one defined by the [MQTT node](https://github.com/lelylan/nodes).
+Forward API requests to the physical world. 
+
+When a request is made from the cloud (through API) the [physical URL](http://dev.lelylan.com/api#get-a-device) (used to decouple the cloud from any physical device or protocol) is called by the physical proxy to forward the request to the physical world. An example of physical URL is the [MQTT node](https://github.com/lelylan/nodes).
 
 
 ## Requirements
@@ -10,8 +12,7 @@ Lelylan Nodes is tested against Node 0.8.8.
 
 ## Installation
 
-    $ mongod
-    $ git clone git@github.com:lelylan/physicals.git
+    $ git clone git@github.com:lelylan/physicals.git && cd physicals
     $ npm install && npm install -g foreman
     $ nf start
 
@@ -24,9 +25,8 @@ Do not forget to provide specs to your contribution.
 
 ### Running specs
 
-* Fork and clone the repository
-* Run `npm install`
-* Run `npm test`
+        npm install
+        npm test
 
 
 ## Coding guidelines
