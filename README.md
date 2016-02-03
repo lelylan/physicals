@@ -30,8 +30,8 @@ Do not forget to provide specs to your contribution.
 
 ### Running specs
 
-        npm install
-        npm test
+    $ npm install
+    $ npm test
 
 
 ## Coding guidelines
