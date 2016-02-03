@@ -13,7 +13,7 @@ Lelylan Nodes is tested against Node 0.8.8.
 ## Installation
 
     $ git clone git@github.com:lelylan/physicals.git && cd physicals
-    $ npm install && npm install -g foreman
+    $ npm install && npm install -g foreman coffee-script
     $ nf start
 
 
