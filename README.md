@@ -17,6 +17,11 @@ Lelylan Nodes is tested against Node 0.8.8.
     $ nf start
 
 
+## Resources
+
+* [Lelylan Physical API](http://dev.lelylan.com/api#api-physical)
+ 
+
 ## Contributing
 
 Fork the repo on github and send a pull requests with topic branches.
