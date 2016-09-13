@@ -15,6 +15,11 @@ Lelylan Nodes is tested against Node 0.8.8.
     $ git clone git@github.com:lelylan/physicals.git && cd physicals
     $ npm install && npm install -g foreman coffee-script
     $ nf start
+
+## Install with docker
+
+    $ docker build --tag=physicals .
+    $ docker run -d -it --name physicals physicals
     
 When installing the service in production set [lelylan environment variables](https://github.com/lelylan/lelylan/blob/master/README.md#production).
 
