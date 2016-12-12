@@ -1,6 +1,6 @@
 # Physical Proxy
 
-Forward API requests to the physical world. 
+Forward API requests to the physical world.
 
 When a request is made from the cloud (through API) the [physical URL](http://dev.lelylan.com/api#get-a-device) (used to decouple the cloud from any physical device or protocol) is called by the physical proxy to forward the request to the physical world. An example of physical URL is the [MQTT node](https://github.com/lelylan/nodes).
 
@@ -12,21 +12,36 @@ Lelylan Nodes is tested against Node 0.8.8.
 
 ## Installation
 
-    $ git clone git@github.com:lelylan/physicals.git && cd physicals
-    $ npm install && npm install -g foreman coffee-script
-    $ nf start
+```bash
+$ git clone git@github.com:lelylan/physicals.git && cd physicals
+$ npm install && npm install -g foreman coffee-script
+$ nf start
+```
 
 ## Install with docker
 
-    $ docker build --tag=physicals .
-    $ docker run -d -it --name physicals physicals
-    
+#### Badges
+Docker image: [lelylanlab/physicals](https://hub.docker.com/r/lelylanlab/physicals/)
+
+[![](https://images.microbadger.com/badges/version/lelylanlab/physicals:latest.svg)](http://microbadger.com/images/lelylanlab/physicals:latest "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/lelylanlab/physicals:latest.svg)](http://microbadger.com/images/lelylanlab/physicals:latest "Get your own image badge on microbadger.com")
+
+### Use docker hub image
+```bash
+$ docker run -d -it --name physicals lelylanlab/physicals
+```
+
+### Generate local image
+```bash
+$ docker build --tag=physicals .
+$ docker run -d -it --name physicals physicals
+```
+
 When installing the service in production set [lelylan environment variables](https://github.com/lelylan/lelylan/blob/master/README.md#production).
 
 ## Resources
 
 * [Lelylan Physical API](http://dev.lelylan.com/api#api-physical)
- 
+
 
 ## Contributing
 
@@ -36,9 +51,10 @@ Do not forget to provide specs to your contribution.
 
 ### Running specs
 
-    $ npm install
-    $ npm test
-
+```bash
+$ npm install
+$ npm test
+```
 
 ## Coding guidelines
 
