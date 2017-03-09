@@ -111,4 +111,4 @@ curl -X PUT http://localhost:3001/devices/50ae4647d033a97575000001/properties \
             "uri": "http://localhost:3002/properties/50ae452dd033a97ecf000001",
             "value": "on" }]
         }'
-```bash
+```
