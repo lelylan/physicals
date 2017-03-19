@@ -10,6 +10,7 @@ Device   = require '../app/models/devices/device'
 
 
 exports.execute = ->
+  Physical.db.db.executeDbCommand({"convertToCapped": "events", size: 10000000, max:1000})
   Physical.find({ physical_processed: false})
   .tailable().stream().on('data', (collection) -> start(collection))
 
